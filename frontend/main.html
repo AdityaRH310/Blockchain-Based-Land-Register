@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Land Registry</title>
+
+    <style>
+        body {
+            margin:0;
+            font-family: Arial;
+            background: url("gov.jpeg") no-repeat center center/cover;
+            height:100vh;
+            overflow:hidden;
+        }
+
+        .overlay {
+            background: rgba(0,0,0,0.5);
+            height:100vh;
+            overflow:hidden;
+        }
+
+        /* 🔷 NAVBAR */
+        .navbar {
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:15px 40px;
+        }
+
+        .logo {
+            display:flex;
+            align-items:center;
+            gap:10px;
+            color:white;
+            font-size:20px;
+            font-weight:bold;
+        }
+
+        .logo img {
+            width:50px;
+            height:50px;
+        }
+
+        .menu {
+            display:flex;
+            gap:15px;
+        }
+
+        .menu a {
+            color:white;
+            text-decoration:none;
+            padding:10px 16px;
+            background:#1e88a8;
+            border-radius:8px;
+            font-weight:bold;
+            transition:0.3s;
+        }
+
+        .menu a:hover {
+            background:#156c84;
+            transform:scale(1.05);
+        }
+
+        /* 🔷 HOME */
+        #home {
+            display:block;
+        }
+
+        .hero {
+            text-align:center;
+            color:white;
+            padding:20px;
+        }
+
+        .hero h1 {
+            font-size:45px;
+            margin-bottom:10px;
+        }
+
+        .hero p {
+            font-size:18px;
+        }
+
+        .cards {
+            display:flex;
+            justify-content:center;
+            gap:25px;
+            flex-wrap:wrap;
+            margin-top:20px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.92);
+            padding:22px;
+            width:250px;
+            border-radius:18px;
+            text-align:center;
+            box-shadow:0 6px 20px rgba(0,0,0,0.4);
+            transition:0.3s;
+        }
+
+        .card:hover {
+            transform:translateY(-8px);
+        }
+
+        .card h3 {
+            font-size:28px;
+            margin-bottom:15px;
+        }
+
+        .card p {
+            font-size:17px;
+            margin-bottom:20px;
+        }
+
+        button {
+            padding:12px 18px;
+            background:#0a6c8c;
+            color:white;
+            border:none;
+            border-radius:8px;
+            cursor:pointer;
+            font-size:16px;
+            transition:0.3s;
+        }
+
+        button:hover {
+            background:black;
+            transform:scale(1.05);
+        }
+
+        /* 🔷 SECTIONS */
+        .section {
+            display:none;
+            padding:20px;
+        }
+
+        /* 🔷 ABOUT */
+        .about-container {
+            width:90%;
+            max-width:1000px;
+            margin:auto;
+            animation:fadeIn 0.6s ease;
+        }
+
+        .about-header {
+            text-align:center;
+            color:white;
+            margin-bottom:20px;
+        }
+
+        .about-header h1 {
+            font-size:34px;
+            margin-bottom:8px;
+        }
+
+        .about-header p {
+            font-size:16px;
+        }
+
+        .about-content {
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(10px);
+            border-radius:20px;
+            padding:18px;
+            box-shadow:0 8px 30px rgba(0,0,0,0.4);
+        }
+
+        .about-card {
+            background: rgba(255,255,255,0.95);
+            padding:20px;
+            border-radius:15px;
+            margin-bottom:20px;
+        }
+
+        .about-card h2 {
+            color:#0a6c8c;
+            margin-bottom:12px;
+        }
+
+        .about-card p {
+            line-height:1.7;
+            color:#333;
+            font-size:15px;
+        }
+
+        .feature-grid {
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+            gap:15px;
+            margin-top:20px;
+        }
+
+        .feature-box {
+            background:white;
+            padding:18px;
+            border-radius:15px;
+            text-align:center;
+            transition:0.3s;
+        }
+
+        .feature-box:hover {
+            transform:translateY(-5px);
+        }
+
+        .feature-box h3 {
+            color:#0a6c8c;
+            margin-bottom:10px;
+        }
+
+        .feature-box p {
+            font-size:14px;
+        }
+
+        .btn-center {
+            text-align:center;
+            margin-top:20px;
+        }
+
+        /* 🔷 SERVICES & CONTACT */
+        .about-box {
+            background: rgba(255,255,255,0.92);
+            padding:22px;
+            border-radius:15px;
+            max-width:650px;
+            margin:auto;
+            box-shadow:0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .about-box ul {
+            line-height:2;
+            font-size:16px;
+        }
+
+        .about-box p {
+            font-size:16px;
+            margin:10px 0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity:0;
+                transform:translateY(20px);
+            }
+            to {
+                opacity:1;
+                transform:translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="overlay">
+
+<!-- 🔷 NAVBAR -->
+<header class="navbar">
+
+    <div class="logo">
+        <img src="logo.png">
+        <span>Government Land Registration</span>
+    </div>
+
+    <div class="menu">
+        <a href="#" onclick="goHome()">Home</a>
+        <a href="#" onclick="showSection('aboutSection')">About</a>
+        <a href="#" onclick="showSection('servicesSection')">Services</a>
+        <a href="#" onclick="showSection('contactSection')">Contact</a>
+    </div>
+
+</header>
+
+<!-- 🔷 HOME -->
+<div id="home">
+
+    <div class="hero">
+        <h1>Government Land Registration</h1>
+        <p>Securely register | search | manage property records online</p>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>🏠 Register Property</h3>
+            <p>Start new property registration</p>
+
+            <button onclick="window.location.href='register.html'">
+                Begin Registration
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>🔍 Query Property</h3>
+            <p>Search land records securely</p>
+
+            <button onclick="window.location.href='search.html'">
+                Search Records
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>🔄 Transfer Ownership</h3>
+            <p>Transfer land ownership safely</p>
+
+            <button onclick="window.location.href='transfer.html'">
+                Initiate Transfer
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- 🔷 ABOUT -->
+<div id="aboutSection" class="section">
+
+    <div class="about-container">
+
+        <div class="about-header">
+            <h1>About Blockchain Land Registry</h1>
+
+            <p>
+                Secure • Transparent • Tamper-Proof Property Management System
+            </p>
+        </div>
+
+        <div class="about-content">
+
+            <div class="about-card">
+
+                <h2>📘 Project Overview</h2>
+
+                <p>
+                    The Blockchain-Based Land Registry System provides a secure and
+                    transparent platform for managing land ownership records.
+                    Traditional systems often suffer from fraud, duplicate ownership,
+                    and lack of transparency.
+                </p>
+
+                <p>
+                    By integrating Hyperledger Fabric with CouchDB, this system ensures
+                    all land records are immutable, traceable, and securely stored.
+                </p>
+
+            </div>
+
+            <div class="feature-grid">
+
+                <div class="feature-box">
+                    <h3>🔐 Secure Records</h3>
+                    <p>Blockchain protects records from modification.</p>
+                </div>
+
+                <div class="feature-box">
+                    <h3>📍 Geo Location</h3>
+                    <p>Interactive map-based property registration.</p>
+                </div>
+
+                <div class="feature-box">
+                    <h3>🔄 Ownership Transfer</h3>
+                    <p>Secure and transparent land transfer.</p>
+                </div>
+
+                <div class="feature-box">
+                    <h3>⚡ Fast Verification</h3>
+                    <p>Quick search and property verification.</p>
+                </div>
+
+            </div>
+
+            <div class="btn-center">
+                <button onclick="goHome()">⬅ Back to Home</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- 🔷 SERVICES -->
+<div id="servicesSection" class="section">
+
+    <div class="about-container">
+
+        <div class="about-header">
+            <h1>Our Services</h1>
+
+            <p>
+                Smart Blockchain Services for Secure Land Management
+            </p>
+        </div>
+
+        <div class="about-content">
+
+            <div class="feature-grid">
+
+                <div class="feature-box">
+                    <h3>📍 Land Registration</h3>
+                    <p>
+                        Register land properties securely using interactive geo-location maps.
+                    </p>
+                </div>
+
+                <div class="feature-box">
+                    <h3>🔍 Property Search</h3>
+                    <p>
+                        Instantly search and verify property records using Land ID.
+                    </p>
+                </div>
+
+                <div class="feature-box">
+                    <h3>🔄 Ownership Transfer</h3>
+                    <p>
+                        Transfer ownership transparently using blockchain technology.
+                    </p>
+                </div>
+
+                <div class="feature-box">
+                    <h3>🔐 Blockchain Security</h3>
+                    <p>
+                        Immutable and tamper-proof records secured using Hyperledger Fabric.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="btn-center">
+                <button onclick="goHome()">⬅ Back to Home</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- 🔷 CONTACT -->
+<div id="contactSection" class="section">
+
+    <div class="about-container">
+
+        <div class="about-header">
+            <h1>Contact Our Team</h1>
+
+            <p>
+                Blockchain Land Registry Development Team
+            </p>
+        </div>
+
+        <div class="about-content">
+
+            <div class="feature-grid">
+
+                <div class="feature-box">
+                    <h3>👨‍💻Kushal Kumar G D</h3>
+                    <p>📞 8310764938</p>
+                </div>
+
+                <div class="feature-box">
+                    <h3>👨‍💻Akash B S</h3>
+                    <p>📞 9353343176</p>
+                </div>
+
+                <div class="feature-box">
+                    <h3>👨‍💻Aditya R H</h3>
+                    <p>📞 8762622221</p>
+                </div>
+
+                <div class="feature-box">
+                    <h3>👨‍💻Arsal S K</h3>
+                    <p>📞 7760944803</p>
+                </div>
+
+            </div>
+
+            
+
+            <div class="btn-center">
+                <button onclick="goHome()">⬅ Back to Home</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- 🔥 SCRIPT -->
+<script>
+function showSection(id) {
+
+    document.getElementById("home").style.display = "none";
+    document.getElementById("aboutSection").style.display = "none";
+    document.getElementById("servicesSection").style.display = "none";
+    document.getElementById("contactSection").style.display = "none";
+
+    document.getElementById(id).style.display = "block";
+}
+
+function goHome() {
+
+    document.getElementById("home").style.display = "block";
+    document.getElementById("aboutSection").style.display = "none";
+    document.getElementById("servicesSection").style.display = "none";
+    document.getElementById("contactSection").style.display = "none";
+}
+</script>
+
+</body>
+</html>

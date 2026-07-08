@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Search Land</title>
+
+    <style>
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    height: 100vh;
+    overflow: hidden;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    height: 100%;
+}
+
+/* 🔍 TITLE */
+.title {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.title h1 {
+    font-size: 38px;
+    margin: 0;
+    color: #071330;
+}
+
+.title p {
+    color: #666;
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+/* 🔍 SEARCH BAR */
+.search-box {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.search-box input {
+    width: 500px;
+    padding: 14px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.search-box button {
+    padding: 14px 22px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    background: #008db1;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.search-box button:hover {
+    background: #006d89;
+}
+
+/* 🔙 BACK BUTTON */
+.back-btn {
+    text-align: center;
+    margin-top: 12px;
+}
+
+.back-btn button {
+    background: #3c3c3c;
+    color: white;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* 📄 RESULT CARD */
+.result-card {
+    background: white;
+    margin-top: 15px;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.card-header {
+    background: #f3f7fd;
+    padding: 18px;
+    font-size: 22px;
+    font-weight: bold;
+    border-bottom: 2px solid #4b8dff;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    padding: 14px;
+    font-size: 15px;
+    border: 1px solid #ddd;
+}
+
+td:first-child {
+    font-weight: bold;
+    width: 45%;
+    background: #fafafa;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- 🔍 TITLE -->
+    <div class="title">
+        <h1>🔎 Search Land</h1>
+        <p>Enter Land ID to view property details</p>
+    </div>
+
+    <!-- 🔍 SEARCH -->
+    <div class="search-box">
+
+        <input id="queryId" placeholder="Enter Land ID">
+
+        <button onclick="queryLand()">
+            🔍 Search
+        </button>
+
+    </div>
+
+    <!-- 🔙 BACK -->
+    <div class="back-btn">
+        <button onclick="goHome()">⬅ Back</button>
+    </div>
+
+    <!-- 📄 RESULT -->
+    <div class="result-card">
+
+        <div class="card-header">
+            📄 Land Details
+        </div>
+
+        <table>
+
+            <tr>
+                <td>🏷 Appraised Value</td>
+                <td id="appraised">-</td>
+            </tr>
+
+            <tr>
+                <td>🎨 Color</td>
+                <td id="color">-</td>
+            </tr>
+
+            <tr>
+                <td>🆔 ID</td>
+                <td id="landid">-</td>
+            </tr>
+
+            <tr>
+                <td>👤 Owner</td>
+                <td id="owner">-</td>
+            </tr>
+
+            <tr>
+                <td>📏 Size</td>
+                <td id="size">-</td>
+            </tr>
+
+            <tr>
+                <td>🕘 History</td>
+                <td id="history">-</td>
+            </tr>
+
+            <tr>
+                <td>📍 Location (Latitude, Longitude)</td>
+                <td id="location">-</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script>
+
+async function queryLand() {
+
+    const id = document.getElementById("queryId").value;
+
+    const res = await fetch(`http://localhost:3000/land/${id}`);
+
+    const data = await res.json();
+
+    document.getElementById("appraised").innerText =
+        data.AppraisedValue;
+
+    document.getElementById("color").innerText =
+        data.Color;
+
+    document.getElementById("landid").innerText =
+        data.ID;
+
+    document.getElementById("owner").innerText =
+        data.Owner;
+
+    document.getElementById("size").innerText =
+        data.Size;
+
+    document.getElementById("history").innerText =
+        data.history;
+
+    document.getElementById("location").innerText =
+        data.location;
+}
+
+function goHome() {
+    window.location.href = "main.html";
+}
+
+</script>
+
+</body>
+</html>

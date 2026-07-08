@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transfer Ownership</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+
+            /* 🔥 BACKGROUND IMAGE */
+            background: url("tr.jpeg") no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        /* 🔥 OVERLAY */
+        .overlay {
+            background: rgba(0,0,0,0.6);
+            height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 🔥 FORM BOX */
+        .form-box {
+            background: rgba(255,255,255,0.9);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            width: 400px;
+
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            animation: fadeIn 0.6s ease;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+        }
+
+        /* 🔥 INPUT */
+        input {
+            padding: 10px;
+            width: 80%;
+            margin: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        /* 🔥 BUTTON */
+        button {
+            padding: 10px 15px;
+            margin: 10px;
+            background: #1e88a8;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background: #156c84;
+        }
+
+        .back-btn {
+            background: #444;
+        }
+
+        /* 🔥 OUTPUT */
+        #output {
+            background: black;
+            color: #00ff00;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        /* 🔥 ANIMATION */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="overlay">
+
+    <div class="form-box">
+
+        <h2>🔄 Transfer Ownership</h2>
+
+        <input id="tid" placeholder="Land ID">
+        <input id="newOwner" placeholder="New Owner">
+
+        <br>
+
+        <button onclick="transfer()">Transfer</button>
+        <button onclick="window.location.href='main.html'" class="back-btn">⬅ Back</button>
+
+        <pre id="output"></pre>
+
+    </div>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>

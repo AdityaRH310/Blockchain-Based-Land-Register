@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register Land</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+    <style>
+         h2{
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 50px;
+        }
+        body {
+            font-family: Arial;
+            margin: 0;
+            padding: 20px;
+            background: #f4f6f8;
+        }
+
+        #map {
+            height: 300px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* 🔥 FORM BOX */
+        .form-box {
+            width: 400px;
+            margin: auto;
+            padding: 25px;
+
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+
+            border-radius: 12px;
+            text-align: center;
+
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* INPUT */
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        input {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+        }
+
+        input:focus {
+            transform: scale(1.05);
+        }
+
+        /* BUTTONS */
+        .btn-group {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background: #1e88a8;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background: #156c84;
+        }
+
+        .back-btn {
+            background: #444;
+        }
+
+        /* ANIMATION */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>📍 Register Land</h2>
+
+<div id="map"></div>
+
+<div class="form-box">
+
+    <h3>Enter Land Details</h3>
+
+    <div class="input-group">
+        <input id="id" placeholder="Land ID">
+        <input id="owner" placeholder="Owner Name">
+    </div>
+
+    <div class="btn-group">
+        <button onclick="registerLand()">Register</button>
+        <button onclick="window.location.href='main.html'" class="back-btn">Back</button>
+    </div>
+
+</div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
